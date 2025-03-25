@@ -1,188 +1,144 @@
 <script lang="ts">
+	import '../../styles/contact.css';
+
 	let formData = {
 		name: '',
 		email: '',
-		phone: '',
-		website: '',
-		message: '',
-		service: 'basic'
+		company: '',
+		package: 'starter',
+		message: ''
 	};
 
-	const services = [
-		{ value: 'basic', label: 'Basic SEO Audit' },
-		{ value: 'advanced', label: 'Advanced SEO Package' },
-		{ value: 'enterprise', label: 'Enterprise SEO Solution' }
-	];
+	const packages = ['starter', 'professional', 'enterprise'];
 
 	function handleSubmit() {
-		// Here you would typically send the form data to your backend
+		// Here you would typically handle the form submission
 		console.log('Form submitted:', formData);
+		// Reset form
+		formData = {
+			name: '',
+			email: '',
+			company: '',
+			package: 'starter',
+			message: ''
+		};
 	}
 </script>
 
 <svelte:head>
 	<title>Contact</title>
-	<meta name="description" content="Contact SEO Kings" />
+	<meta name="description" content="Contact Us" />
 </svelte:head>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-	<div class="max-w-3xl mx-auto">
-		<div class="text-center">
-			<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">Contact Us</h1>
-			<p class="mt-4 text-xl text-gray-600">
-				Get in touch with our SEO experts and start improving your website's performance today.
-			</p>
-		</div>
+<div class="contact-container">
+	<!-- Contact Header -->
+	<section class="section">
+		<div class="container">
+			<div class="contact-grid">
+				<!-- Contact Form -->
+				<div class="contact-form">
+					<h2 class="section-title">Get in Touch</h2>
+					<form on:submit|preventDefault={handleSubmit}>
+						<div class="form-group">
+							<label class="form-label" for="name">Name</label>
+							<input type="text" id="name" class="form-input" bind:value={formData.name} required />
+						</div>
 
-		<div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
-			<!-- Contact Information -->
-			<div>
-				<h2 class="text-2xl font-bold text-gray-900">Get in Touch</h2>
-				<p class="mt-4 text-gray-600">
-					Ready to improve your website's search engine rankings? Contact us for a free
-					consultation.
-				</p>
+						<div class="form-group">
+							<label class="form-label" for="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								class="form-input"
+								bind:value={formData.email}
+								required
+							/>
+						</div>
 
-				<div class="mt-8 space-y-6">
-					<div class="flex items-center">
-						<svg
-							class="h-6 w-6 text-blue-600"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+						<div class="form-group">
+							<label class="form-label" for="company">Company</label>
+							<input
+								type="text"
+								id="company"
+								class="form-input"
+								bind:value={formData.company}
+								required
 							/>
-						</svg>
-						<span class="ml-3 text-gray-600">contact@seoexpert.com</span>
+						</div>
+
+						<div class="form-group">
+							<label class="form-label" for="package">Interested Package</label>
+							<select id="package" class="form-select" bind:value={formData.package}>
+								{#each packages as pkg}
+									<option value={pkg}>{pkg.charAt(0).toUpperCase() + pkg.slice(1)}</option>
+								{/each}
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label class="form-label" for="message">Message</label>
+							<textarea
+								id="message"
+								class="form-textarea"
+								rows="4"
+								bind:value={formData.message}
+								required
+							></textarea>
+						</div>
+
+						<button type="submit" class="btn btn-primary">Send Message</button>
+					</form>
+				</div>
+
+				<!-- Contact Information -->
+				<div class="contact-info">
+					<h2 class="section-title">Contact Information</h2>
+
+					<div class="info-group">
+						<h3 class="info-title">Email</h3>
+						<p class="info-content">
+							<a href="mailto:contact@automatepro.com">contact@automatepro.com</a>
+						</p>
 					</div>
-					<div class="flex items-center">
-						<svg
-							class="h-6 w-6 text-blue-600"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-							/>
-						</svg>
-						<span class="ml-3 text-gray-600">+1 (555) 123-4567</span>
+
+					<div class="info-group">
+						<h3 class="info-title">Phone</h3>
+						<p class="info-content">
+							<a href="tel:+1234567890">+1 (234) 567-890</a>
+						</p>
 					</div>
-					<div class="flex items-center">
-						<svg
-							class="h-6 w-6 text-blue-600"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-							/>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-							/>
-						</svg>
-						<span class="ml-3 text-gray-600">123 SEO Street, Digital City, 12345</span>
+
+					<div class="info-group">
+						<h3 class="info-title">Office</h3>
+						<p class="info-content">
+							123 Automation Street<br />
+							Silicon Valley, CA 94025<br />
+							United States
+						</p>
+					</div>
+
+					<div class="info-group">
+						<h3 class="info-title">Hours</h3>
+						<p class="info-content">
+							Monday - Friday<br />
+							9:00 AM - 6:00 PM PST
+						</p>
 					</div>
 				</div>
 			</div>
-
-			<!-- Contact Form -->
-			<form on:submit|preventDefault={handleSubmit} class="space-y-6">
-				<div>
-					<label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-					<input
-						type="text"
-						id="name"
-						bind:value={formData.name}
-						required
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					/>
-				</div>
-
-				<div>
-					<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-					<input
-						type="email"
-						id="email"
-						bind:value={formData.email}
-						required
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					/>
-				</div>
-
-				<div>
-					<label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-					<input
-						type="tel"
-						id="phone"
-						bind:value={formData.phone}
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					/>
-				</div>
-
-				<div>
-					<label for="website" class="block text-sm font-medium text-gray-700">Website</label>
-					<input
-						type="url"
-						id="website"
-						bind:value={formData.website}
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					/>
-				</div>
-
-				<div>
-					<label for="service" class="block text-sm font-medium text-gray-700"
-						>Service Interest</label
-					>
-					<select
-						id="service"
-						bind:value={formData.service}
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					>
-						{#each services as service}
-							<option value={service.value}>{service.label}</option>
-						{/each}
-					</select>
-				</div>
-
-				<div>
-					<label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-					<textarea
-						id="message"
-						bind:value={formData.message}
-						rows="4"
-						required
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					></textarea>
-				</div>
-
-				<div>
-					<button
-						type="submit"
-						class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-					>
-						Send Message
-					</button>
-				</div>
-			</form>
 		</div>
-	</div>
+	</section>
+
+	<!-- Map Section -->
+	<section class="section map-section">
+		<div class="container">
+			<div class="map-container">
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.4033560425414!2d-122.08374688397888!3d37.42199997982367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x6c296c66619367e0!2sGoogleplex!5e0!3m2!1sen!2sus!4v1624308999821!5m2!1sen!2sus"
+					title="Office Location"
+					loading="lazy"
+				></iframe>
+			</div>
+		</div>
+	</section>
 </div>

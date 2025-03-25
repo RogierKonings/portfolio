@@ -1,8 +1,14 @@
 <script lang="ts">
-	export let src = '';
-	export let alt = '';
-	export let sources: any[] = [];
-	export let sizes = '100vw';
+	interface ImageSource {
+		srcset: string;
+		media?: string;
+		type?: string;
+	}
+
+	export const src = '';
+	export const alt = '';
+	export const sources: ImageSource[] = [];
+	export const sizes = '100vw';
 </script>
 
 <!-- Responsive Image Component -->

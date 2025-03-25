@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { i18n } from '$lib/i18n';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
-	import Header from './Header.svelte';
 	import '../app.css';
+	import '../styles/layout.css';
 	import Navigation from './Navigation.svelte';
 
-	let { children } = $props();
+	const { children } = $props();
 </script>
 
 <ParaglideJS {i18n}>
-	<div class="min-h-screen bg-gray-50">
+	<div class="app">
 		<Navigation />
 		<main>
 			{@render children()}
 		</main>
-		<footer class="bg-white mt-12">
-			<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-				<div class="text-center">
-					<p class="text-gray-500 text-sm">
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-content">
+					<p class="footer-text">
 						© {new Date().getFullYear()} SEO Expert. All rights reserved.
 					</p>
 				</div>

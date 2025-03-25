@@ -16,7 +16,7 @@ const config = {
 		paths: {
 			relative: false
 		},
-		inlineStyleThreshold: Infinity
+		inlineStyleThreshold: Number.POSITIVE_INFINITY
 	},
 
 	extensions: ['.svelte', '.svx']

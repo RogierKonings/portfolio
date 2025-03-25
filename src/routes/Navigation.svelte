@@ -1,37 +1,35 @@
 <script lang="ts">
-	const isMenuOpen = false;
+	import '../styles/navigation.css';
+	// biome-ignore lint/style/useConst: `isMenuOpen` is reassigned when the menu is toggled
+	let isMenuOpen = false;
 </script>
 
-<nav class="bg-white shadow-lg fixed w-full z-50">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex justify-between h-16">
-			<div class="flex">
-				<div class="flex-shrink-0 flex items-center">
-					<a href="/" class="text-xl font-bold text-blue-600">AutomatePro</a>
+<nav class="nav">
+	<div class="nav-container">
+		<div class="nav-content">
+			<div class="nav-left">
+				<div class="nav-logo">
+					<a href="/" class="nav-logo-link">AutomatePro</a>
 				</div>
-				<div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-					<a href="/" class="inline-flex items-center px-1 pt-1 text-gray-700 hover:text-blue-600">Home</a>
-					<a href="/services" class="inline-flex items-center px-1 pt-1 text-gray-700 hover:text-blue-600">Products</a>
-					<a href="/contact" class="inline-flex items-center px-1 pt-1 text-gray-700 hover:text-blue-600">Contact</a>
+				<div class="nav-links">
+					<a href="/" class="nav-link">Home</a>
+					<a href="/services" class="nav-link">Products</a>
+					<a href="/contact" class="nav-link">Contact</a>
 				</div>
 			</div>
-			<div class="hidden sm:ml-6 sm:flex sm:items-center">
-				<a
-					href="/contact"
-					class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-				>
-					Get Started
-				</a>
+			<div class="nav-right">
+				<a href="/contact" class="get-started-button">Get Started</a>
 			</div>
-			<div class="-mr-2 flex items-center sm:hidden">
+			<div class="mobile-menu-button">
 				<button
 					on:click={() => (isMenuOpen = !isMenuOpen)}
-					class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+					class="mobile-button"
+					aria-label="Toggle menu"
 				>
 					<span class="sr-only">Open main menu</span>
 					{#if isMenuOpen}
 						<svg
-							class="block h-6 w-6"
+							class="menu-icon"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
@@ -46,7 +44,7 @@
 						</svg>
 					{:else}
 						<svg
-							class="block h-6 w-6"
+							class="menu-icon"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
@@ -63,30 +61,15 @@
 				</button>
 			</div>
 		</div>
-	</div>
-
-	{#if isMenuOpen}
-		<div class="sm:hidden">
-			<div class="pt-2 pb-3 space-y-1">
-				<a
-					href="/"
-					class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-				>
-					Home
-				</a>
-				<a
-					href="/services"
-					class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-				>
-					Products
-				</a>
-				<a
-					href="/contact"
-					class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-				>
-					Contact
-				</a>
+		
+		{#if isMenuOpen}
+			<div class="mobile-menu">
+				<div class="mobile-nav-links">
+					<a href="/" class="mobile-nav-link">Home</a>
+					<a href="/services" class="mobile-nav-link">Products</a>
+					<a href="/contact" class="mobile-nav-link">Contact</a>
+				</div>
 			</div>
-		</div>
-	{/if}
+		{/if}
+	</div>
 </nav>

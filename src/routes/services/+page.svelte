@@ -1,104 +1,153 @@
 <script lang="ts">
-	const services = [
+	import '../../styles/services.css';
+	
+	const packages = [
 		{
-			name: 'Basic SEO Audit',
-			price: '€499',
-			description: 'Comprehensive website analysis with actionable recommendations',
+			name: 'Starter',
+			price: '999',
+			description: 'Perfect for small businesses starting with automation',
 			features: [
-				'Technical SEO audit',
-				'On-page optimization review',
-				'Competitor analysis',
-				'Basic keyword research',
-				'Detailed report with recommendations'
+				'Document Processing Automation',
+				'Basic Workflow Automation',
+				'Email Integration',
+				'Standard Support',
+				'2 Automation Workflows'
 			]
 		},
 		{
-			name: 'Advanced SEO Package',
-			price: '€999',
-			description: 'Complete SEO optimization with ongoing support',
+			name: 'Professional',
+			price: '2,499',
+			description: 'Ideal for growing businesses with complex needs',
 			features: [
-				'Everything in Basic SEO Audit',
-				'Content optimization',
-				'Advanced keyword research',
-				'Link building strategy',
-				'3 months of support',
-				'Monthly performance reports'
-			]
+				'Everything in Starter',
+				'Advanced Workflow Automation',
+				'CRM Integration',
+				'Priority Support',
+				'5 Automation Workflows',
+				'Custom Reporting'
+			],
+			highlighted: true
 		},
 		{
-			name: 'Enterprise SEO Solution',
+			name: 'Enterprise',
 			price: 'Custom',
-			description: 'Tailored SEO strategy for large businesses',
+			description: 'For large organizations requiring full-scale automation',
 			features: [
-				'Everything in Advanced SEO Package',
-				'Custom SEO strategy',
-				'Dedicated SEO manager',
-				'Advanced technical optimization',
-				'International SEO setup',
-				'Ongoing optimization',
-				'Quarterly strategy reviews'
+				'Everything in Professional',
+				'Unlimited Automation Workflows',
+				'Custom API Integration',
+				'Dedicated Support Manager',
+				'Advanced Analytics',
+				'Custom Development'
 			]
 		}
 	];
 </script>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-	<div class="text-center">
-		<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">SEO Services & Pricing</h1>
-		<p class="mt-4 text-xl text-gray-600">Choose the perfect SEO package for your business</p>
-	</div>
+<div class="services-container">
+	<!-- Pricing Header -->
+	<section class="section section-alt">
+		<div class="pricing-header">
+			<h1>Choose Your Automation Package</h1>
+			<p class="pricing-description">
+				Select the perfect automation solution that fits your business needs and budget
+			</p>
+		</div>
+	</section>
 
-	<div class="mt-12 grid gap-8 lg:grid-cols-3">
-		{#each services as service}
-			<div class="bg-white rounded-lg shadow-lg overflow-hidden">
-				<div class="px-6 py-8">
-					<h3 class="text-2xl font-bold text-gray-900">{service.name}</h3>
-					<p class="mt-4 text-gray-500">{service.description}</p>
-					<p class="mt-8">
-						<span class="text-4xl font-bold text-gray-900">{service.price}</span>
+	<!-- Pricing Cards -->
+	<section class="section">
+		<div class="container">
+			<div class="pricing-grid">
+				{#each packages as pkg}
+					<div class="pricing-card" class:highlighted={pkg.highlighted}>
+						{#if pkg.highlighted}
+							<div class="highlighted-badge"></div>
+						{/if}
+						<div class="card-content" class:highlighted={pkg.highlighted}>
+							<h3 class="package-name">{pkg.name}</h3>
+							<div class="price-container">
+								<span class="price">${pkg.price}</span>
+								{#if pkg.price !== 'Custom'}
+									<span class="price-period">/month</span>
+								{/if}
+							</div>
+							<p class="package-description">
+								{pkg.description}
+							</p>
+						</div>
+						<div class="features-container">
+							<ul class="features-list">
+								{#each pkg.features as feature}
+									<li class="feature-item">
+										<svg
+											class="feature-icon"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+										{feature}
+									</li>
+								{/each}
+							</ul>
+							<a
+								href="/contact"
+								class="cta-button"
+								class:outlined={!pkg.highlighted}
+							>
+								{pkg.price === 'Custom' ? 'Contact Us' : 'Get Started'}
+							</a>
+						</div>
+					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="section section-alt">
+		<div class="container">
+			<h2 class="faq-title">Frequently Asked Questions</h2>
+			<div class="faq-grid">
+				<div class="faq-card">
+					<h3 class="faq-question">How quickly can I get started?</h3>
+					<p class="faq-answer">
+						Most automation solutions can be implemented within 2-4 weeks, depending on complexity
+						and requirements.
 					</p>
-					<a
-						href="/contact"
-						class="mt-8 block w-full bg-blue-600 text-white text-center py-3 px-6 rounded-md hover:bg-blue-700"
-					>
-						Get Started
-					</a>
 				</div>
-				<div class="px-6 py-8 bg-gray-50">
-					<ul class="space-y-4">
-						{#each service.features as feature}
-							<li class="flex items-center">
-								<svg
-									class="h-5 w-5 text-green-500"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20"
-									fill="currentColor"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								<span class="ml-3 text-gray-700">{feature}</span>
-							</li>
-						{/each}
-					</ul>
+				<div class="faq-card">
+					<h3 class="faq-question">Do you offer custom solutions?</h3>
+					<p class="faq-answer">
+						Yes, our Enterprise package includes custom development to meet your specific automation
+						needs.
+					</p>
+				</div>
+				<div class="faq-card">
+					<h3 class="faq-question">What kind of support do you provide?</h3>
+					<p class="faq-answer">
+						We offer different levels of support based on your package, from standard support to
+						dedicated support managers.
+					</p>
+				</div>
+				<div class="faq-card">
+					<h3 class="faq-question">Can I upgrade my package later?</h3>
+					<p class="faq-answer">
+						Yes, you can upgrade to a higher tier package at any time as your automation needs grow.
+					</p>
 				</div>
 			</div>
-		{/each}
-	</div>
-
-	<div class="mt-16 text-center">
-		<h2 class="text-2xl font-bold text-gray-900">Need a Custom Solution?</h2>
-		<p class="mt-4 text-gray-600">
-			We can create a tailored SEO strategy that perfectly fits your business needs.
-		</p>
-		<a
-			href="/contact"
-			class="mt-8 inline-block bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700"
-		>
-			Contact Us
-		</a>
-	</div>
+		</div>
+	</section>
 </div>
+
+<style>
+	/* Add styles here */
+</style>
